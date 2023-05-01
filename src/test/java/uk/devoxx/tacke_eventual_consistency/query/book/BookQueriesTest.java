@@ -34,7 +34,7 @@ class BookQueriesTest {
     void findBooks_noTitle() {
         // given
         AuthorDTO authorDTO = new AuthorDTO(1L, null, null);
-        BookDTO bookDTO = new BookDTO(1L, authorDTO, "title1", "genre1", null, false, null);
+        BookDTO bookDTO = new BookDTO(1L, authorDTO, "title1", "genre1", null, false, null, new ArrayList<>());
         when(bookFlow.findAllBooks()).thenReturn(List.of(bookDTO));
         when(authorFlow.findById(1L)).thenReturn(new AuthorDTO(1L, "firstName", "lastName"));
         // when
@@ -48,7 +48,7 @@ class BookQueriesTest {
     void findBooks_givenTitle() {
         // given
         AuthorDTO authorDTO = new AuthorDTO(2L, null, null);
-        BookDTO bookDTO = new BookDTO(2L, authorDTO, "title2", "genre2", null, false, null);
+        BookDTO bookDTO = new BookDTO(2L, authorDTO, "title2", "genre2", null, false, null, new ArrayList<>());
         when(bookFlow.findAllBooksWithMatchingTitle("title2")).thenReturn(List.of(bookDTO));
         when(authorFlow.findById(2L)).thenReturn(new AuthorDTO(2L, "firstName2", "lastName2"));
         // when

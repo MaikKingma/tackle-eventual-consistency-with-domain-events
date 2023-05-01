@@ -6,10 +6,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import uk.devoxx.tacke_eventual_consistency.domain.book.Book;
 import uk.devoxx.tacke_eventual_consistency.domaininteraction.author.AuthorDTO;
 import uk.devoxx.tacke_eventual_consistency.domaininteraction.book.BookDTO;
 import uk.devoxx.tacke_eventual_consistency.domaininteraction.book.BookDataService;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,7 +37,8 @@ class PublisherFlowTest {
         // given
         UUID publisherId = UUID.randomUUID();
         var authorDTO = new AuthorDTO(1L, "firstName", "lastName");
-        var bookDTO = new BookDTO(1L, authorDTO, "title", "description", null, false, null);
+        var bookDTO = new BookDTO(1L, authorDTO, "title", "description", null, false, null,
+                new ArrayList<>());
         var publisherDTO = new PublisherDTO(publisherId,
                 "publisherName");
         when(publisherAppService.getPublisherById(publisherId.toString())).thenReturn(publisherDTO);
@@ -46,6 +49,8 @@ class PublisherFlowTest {
         ArgumentCaptor<BookDTO> argumentCaptor = ArgumentCaptor.forClass(BookDTO.class);
         verify(bookDataService, times(1)).save(argumentCaptor.capture());
         assertThat(argumentCaptor.getValue().publisherId()).isEqualTo(publisherId);
+        assertThat(argumentCaptor.getValue().domainEvents()).containsExactly(new Book.RequestPublishingEvent(
+                1L, publisherId));
     }
 
     @Test
@@ -77,7 +82,8 @@ class PublisherFlowTest {
         // given
         UUID publisherId = UUID.randomUUID();
         var authorDTO = new AuthorDTO(1L, "firstName", "lastName");
-        var bookDTO = new BookDTO(1L, authorDTO, "title", "description", UUID.randomUUID(), false, null);
+        var bookDTO = new BookDTO(1L, authorDTO, "title", "description", UUID.randomUUID(), false, null,
+                new ArrayList<>());
         var publisherDTO = new PublisherDTO(publisherId,
                 "publisherName");
         when(publisherAppService.getPublisherById(publisherId.toString())).thenReturn(publisherDTO);
