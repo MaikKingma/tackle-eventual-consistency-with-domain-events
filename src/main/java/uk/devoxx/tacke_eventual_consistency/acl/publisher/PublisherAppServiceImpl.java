@@ -91,7 +91,7 @@ public class PublisherAppServiceImpl implements PublisherAppService {
         return publisherServiceBaseUri + subPath;
     }
 
-    private record PublisherPayload(UUID id, String name) { }
+    record PublisherPayload(UUID id, String name) { }
 
-    private record RequestPublishingResponsePayload(String isbn) { }
+    record RequestPublishingResponsePayload(String isbn) { }
 }

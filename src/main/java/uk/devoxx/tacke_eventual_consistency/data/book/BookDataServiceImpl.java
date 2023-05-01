@@ -6,6 +6,7 @@ import uk.devoxx.tacke_eventual_consistency.domaininteraction.book.BookDataServi
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,6 +53,6 @@ public class BookDataServiceImpl implements BookDataService {
         var authorJPA = bookJPA.getAuthor();
         var authorDTO = new AuthorDTO(authorJPA.getId(), authorJPA.getFirstName(), authorJPA.getLastName());
         return new BookDTO(bookJPA.getId(), authorDTO, bookJPA.getTitle(), bookJPA.getGenre(),
-                bookJPA.getPublisherId(), bookJPA.isPublished(), bookJPA.getIsbn());
+                bookJPA.getPublisherId(), bookJPA.isPublished(), bookJPA.getIsbn(), new ArrayList<>());
     }
 }

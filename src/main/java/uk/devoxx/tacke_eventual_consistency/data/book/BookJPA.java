@@ -1,6 +1,7 @@
 package uk.devoxx.tacke_eventual_consistency.data.book;
 
 
+import org.springframework.data.domain.AbstractAggregateRoot;
 import uk.devoxx.tacke_eventual_consistency.data.author.AuthorJPA;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,7 +15,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import uk.devoxx.tacke_eventual_consistency.domain.DomainEvent;
 
+import java.util.List;
 import java.util.UUID;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
@@ -29,7 +32,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @NoArgsConstructor()
 @AllArgsConstructor
 @Table(name = "book")
-public class BookJPA{
+public class BookJPA extends AbstractAggregateRoot<BookJPA> {
 
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "book_seq_gen")
@@ -56,4 +59,8 @@ public class BookJPA{
 
     @Getter
     private String isbn;
+
+    public void registerDomainEvents(List<DomainEvent> domainEvents) {
+        domainEvents.forEach(this::andEvent);
+    }
 }
