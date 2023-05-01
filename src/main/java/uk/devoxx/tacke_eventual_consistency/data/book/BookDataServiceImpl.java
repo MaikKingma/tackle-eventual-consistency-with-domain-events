@@ -41,6 +41,13 @@ public class BookDataServiceImpl implements BookDataService {
                 .toList();
     }
 
+    @Override
+    public BookDTO findById(Long bookId) {
+        return bookRepository.findById(bookId)
+                .map(this::getDTOFromJPA)
+                .orElseThrow(() -> new BookNotFoundException(String.format("Book with id %d could not be found!", bookId)));
+    }
+
     private BookDTO getDTOFromJPA(BookJPA bookJPA) {
         var authorJPA = bookJPA.getAuthor();
         var authorDTO = new AuthorDTO(authorJPA.getId(), authorJPA.getFirstName(), authorJPA.getLastName());

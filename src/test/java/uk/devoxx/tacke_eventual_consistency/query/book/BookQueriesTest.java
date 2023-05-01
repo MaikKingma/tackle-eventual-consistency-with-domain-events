@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,6 +56,6 @@ class BookQueriesTest {
         // then
         verify(bookFlow, times(1)).findAllBooksWithMatchingTitle("title2");
         verify(authorFlow, times(1)).findById(2L);
-        assertThat(books).containsExactly(new BookView("title2", "genre2", "firstName2 lastName2"));
+        assertThat(books).containsExactly(new BookView(2L, "title2", "genre2", "firstName2 lastName2"));
     }
 }

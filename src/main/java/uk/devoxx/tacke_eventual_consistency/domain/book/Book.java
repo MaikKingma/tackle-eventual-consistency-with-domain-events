@@ -40,4 +40,12 @@ public class Book {
     public static Book createManuscript(String title, Genre genre, Author author) {
         return new Book(null, author, title, genre, null, false, null);
     }
+
+    public void requestPublishing(UUID publisherId) {
+        this.publisherId = publisherId;
+    }
+
+    public boolean canBePublished() {
+        return publisherId == null && !published;
+    }
 }
