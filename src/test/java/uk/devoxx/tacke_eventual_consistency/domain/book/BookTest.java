@@ -27,5 +27,6 @@ class BookTest {
         assertThat(book.getPublisherId()).isEqualTo(publisherId);
         assertThat(book.canBePublished()).isFalse();
         assertThat(book.getIsbn()).isNull();
+        assertThat(book.getDomainEvents()).hasSize(1).containsExactly(new Book.RequestPublishingEvent(book.getId(), publisherId));
     }
 }
