@@ -1,6 +1,7 @@
 package uk.devoxx.tacke_eventual_consistency.command.author;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.mockserver.springtest.MockServerTest;
 import uk.devoxx.tacke_eventual_consistency.data.author.AuthorJPA;
 import uk.devoxx.tacke_eventual_consistency.data.book.BookJPA;
 import uk.devoxx.tacke_eventual_consistency.data.book.BookRepository;
@@ -20,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@MockServerTest
 @SpringBootTest
 @AutoConfigureMockMvc
 class AuthorActionCommandsIntegrationTest {

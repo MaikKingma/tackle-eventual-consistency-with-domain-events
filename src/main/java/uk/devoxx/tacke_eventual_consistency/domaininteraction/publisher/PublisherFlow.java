@@ -5,6 +5,8 @@ import uk.devoxx.tacke_eventual_consistency.domaininteraction.book.BookDTO;
 import uk.devoxx.tacke_eventual_consistency.domaininteraction.book.BookDataService;
 import uk.devoxx.tacke_eventual_consistency.domaininteraction.book.BookDomainMapper;
 
+import java.util.UUID;
+
 /**
  * @author Maik Kingma
  */
@@ -31,6 +33,10 @@ public class PublisherFlow {
         book.requestPublishing(publisherDTO.id());
         var updatedBookDto = new BookDTO(book);
         bookDataService.save(updatedBookDto);
+    }
+
+    public PublisherDTO findPublisherById(UUID publisherId) {
+        return publisherAppService.getPublisherById(publisherId.toString());
     }
 
     static class BookAlreadyInPublishingException  extends RuntimeException{

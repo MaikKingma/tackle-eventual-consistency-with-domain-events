@@ -29,4 +29,23 @@ class BookTest {
         assertThat(book.getIsbn()).isNull();
         assertThat(book.getDomainEvents()).hasSize(1).containsExactly(new Book.RequestPublishingEvent(book.getId(), publisherId));
     }
+
+    @Test
+    void updatePublishingInfo() {
+        // given
+        UUID publisherId = UUID.randomUUID();
+        Book book = Book.createManuscript("title", HORROR, Author.restore().firstName("first").lastName("last").id(1L).build());
+        book.requestPublishing(publisherId);
+        assertThat(book.isPublished()).isFalse();
+        assertThat(book.getPublisherId()).isEqualTo(publisherId);
+        assertThat(book.canBePublished()).isFalse();
+        assertThat(book.getIsbn()).isNull();
+        // when
+        book.updatePublishingInfo("isbn");
+        // then
+        assertThat(book.isPublished()).isTrue();
+        assertThat(book.getPublisherId()).isEqualTo(publisherId);
+        assertThat(book.canBePublished()).isFalse();
+        assertThat(book.getIsbn()).isEqualTo("isbn");
+    }
 }

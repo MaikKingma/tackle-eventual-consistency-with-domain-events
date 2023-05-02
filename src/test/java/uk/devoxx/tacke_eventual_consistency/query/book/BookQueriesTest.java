@@ -56,6 +56,6 @@ class BookQueriesTest {
         // then
         verify(bookFlow, times(1)).findAllBooksWithMatchingTitle("title2");
         verify(authorFlow, times(1)).findById(2L);
-        assertThat(books).containsExactly(new BookView(2L, "title2", "genre2", "firstName2 lastName2"));
+        assertThat(books).containsExactly(new BookView(2L, "title2", "genre2", null, null, "firstName2 lastName2"));
     }
 }
