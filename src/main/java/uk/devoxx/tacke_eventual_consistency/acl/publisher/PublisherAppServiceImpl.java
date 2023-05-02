@@ -27,9 +27,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Service
 public class PublisherAppServiceImpl implements PublisherAppService {
 
-    @Value("${mock.publisher-service}")
-    private boolean mockPublisherService;
-
     private static final String SUB_PATH_PUBLISHERS = "/publishers";
     private static final String SUB_PATH_PUBLISHERS_ID = "/publishers/%s";
     private static final String SUB_PATH_PUBLISHERS_RECEIVE_BOOK_OFFER = "/publishers/receiveBookOffer";
@@ -58,9 +55,6 @@ public class PublisherAppServiceImpl implements PublisherAppService {
 
             return new PublisherDTO(result.id, result.name);
         } catch (Exception e) {
-            if (mockPublisherService) {
-                return new PublisherDTO(UUID.fromString(publisherId), "MOCKED PUBLISHER");
-            }
             throw new PublisherNotFoundException("No publisher found with ID " + publisherId);
         }
     }
