@@ -29,7 +29,6 @@ public class PublisherAppServiceImplTest {
     public void setUp() {
         publisherAppService = new PublisherAppServiceImpl();
         ReflectionTestUtils.setField(publisherAppService, "publisherServiceBaseUri", "http://localhost:8080");
-        ReflectionTestUtils.setField(publisherAppService, "mockPublisherService", false);
         ReflectionTestUtils.setField(publisherAppService, "restTemplate", restTemplate);
     }
 
