@@ -1,14 +1,17 @@
 package uk.devoxx.tacke_eventual_consistency.domaininteraction.book;
 
+import org.mockito.Answers;
 import uk.devoxx.tacke_eventual_consistency.domaininteraction.author.AuthorDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import uk.devoxx.tacke_eventual_consistency.domaininteraction.publisher.PublisherAppService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
@@ -20,6 +23,9 @@ class BookFlowTest {
 
     @Mock
     private BookDataService bookDataService;
+
+    @Mock
+    private PublisherAppService publisherAppService;
 
     @InjectMocks
     private BookFlow bookFlow;
@@ -48,10 +54,25 @@ class BookFlowTest {
         when(bookDataService.findByPartialTitle("title")).thenReturn(List.of(
                 new BookDTO(1L, new AuthorDTO(1L, "Tom", "Someone"), "title", "genre", null, false, null, new ArrayList<>())));
         // when
-        bookFlow.findAllBooksWithMatchingTitle("title");
+        List<BookDTO> allBooksWithMatchingTitle = bookFlow.findAllBooksWithMatchingTitle("title");
         // then
         verify(bookDataService, times(1)).findByPartialTitle("title");
-        assertThat(bookFlow.findAllBooksWithMatchingTitle("title")).containsExactlyInAnyOrder(
+        assertThat(allBooksWithMatchingTitle).containsExactlyInAnyOrder(
                 new BookDTO(1L, new AuthorDTO(1L, "Tom", "Someone"), "title", "genre", null, false, null, new ArrayList<>()));
+    }
+
+    @Test
+    void requestPublishingAtPublisher() {
+        // given
+        var publisherId = UUID.randomUUID();
+        AuthorDTO givenAuthor = new AuthorDTO(1L, "Tom", "Someone");
+        BookDTO givenBook = new BookDTO(1L, givenAuthor, "title", "OTHER", publisherId, false, null, new ArrayList<>());
+        when(bookDataService.findById(1L)).thenReturn(givenBook);
+        when(publisherAppService.requestPublishing(publisherId, givenAuthor.getFullName(), givenBook.title())).thenReturn("123456");
+        // when
+        bookFlow.requestPublishingAtPublisher(publisherId, 1L);
+        // then
+        BookDTO expectedBook = new BookDTO(1L, new AuthorDTO(1L, "Tom", "Someone"), "title", "OTHER", publisherId, true, "123456", new ArrayList<>());
+        verify(bookDataService, times(1)).save(expectedBook);
     }
 }
