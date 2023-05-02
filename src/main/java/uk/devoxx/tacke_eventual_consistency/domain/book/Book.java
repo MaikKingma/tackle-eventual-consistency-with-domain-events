@@ -58,6 +58,11 @@ public class Book {
         return publisherId == null && !published;
     }
 
+    public void updatePublishingInfo(String isbn) {
+        this.isbn = isbn;
+        this.published = true;
+    }
+
     @Value
     public static class RequestPublishingEvent extends DomainEvent {
         Long bookId;
