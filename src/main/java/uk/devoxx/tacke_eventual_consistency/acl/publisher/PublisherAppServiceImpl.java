@@ -26,6 +26,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @Service
 public class PublisherAppServiceImpl implements PublisherAppService {
+
     private static final String SUB_PATH_PUBLISHERS = "/publishers";
     private static final String SUB_PATH_PUBLISHERS_ID = "/publishers/%s";
     private static final String SUB_PATH_PUBLISHERS_RECEIVE_BOOK_OFFER = "/publishers/receiveBookOffer";
