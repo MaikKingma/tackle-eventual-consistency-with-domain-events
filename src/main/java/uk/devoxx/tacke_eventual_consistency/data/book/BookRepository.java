@@ -1,7 +1,7 @@
 package uk.devoxx.tacke_eventual_consistency.data.book;
 
 import org.springframework.stereotype.Repository;
-import uk.devoxx.tacke_eventual_consistency.data.custom.ExtendedRepository;
+import uk.devoxx.tacke_eventual_consistency.data.baserepository.BaseJpaRepository;
 
 import java.util.List;
 
@@ -10,6 +10,6 @@ import java.util.List;
  */
 
 @Repository
-public interface BookRepository extends ExtendedRepository<BookJPA, Long> {
+public interface BookRepository extends BaseJpaRepository<BookJPA, Long> {
     List<BookJPA> findByTitleContains(String title);
 }

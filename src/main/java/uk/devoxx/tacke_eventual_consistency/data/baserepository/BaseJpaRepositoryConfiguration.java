@@ -1,11 +1,11 @@
-package uk.devoxx.tacke_eventual_consistency.data.custom;
+package uk.devoxx.tacke_eventual_consistency.data.baserepository;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "uk.devoxx.tacke_eventual_consistency.data",
-        repositoryBaseClass = ExtendedRepositoryImpl.class, repositoryFactoryBeanClass = MyRepositoryFactoryBean.class)
-public class ExtendedRepositoryConfiguration {
+        repositoryBaseClass = BaseJpaRepositoryImpl.class, repositoryFactoryBeanClass = BaseJpaRepositoryFactoryBean.class)
+public class BaseJpaRepositoryConfiguration {
 
 }

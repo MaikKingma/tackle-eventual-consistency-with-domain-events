@@ -1,4 +1,4 @@
-package uk.devoxx.tacke_eventual_consistency.data.custom;
+package uk.devoxx.tacke_eventual_consistency.data.baserepository;
 
 import jakarta.persistence.EntityManager;
 import org.slf4j.Logger;
@@ -13,15 +13,15 @@ import java.util.Collection;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class ExtendedRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements ExtendedRepository<T, ID> {
+public class BaseJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
 
-    private static final Logger log = getLogger(ExtendedRepositoryImpl.class);
+    private static final Logger log = getLogger(BaseJpaRepositoryImpl.class);
 
     private final EntityManager entityManager;
     private final ApplicationEventPublisher eventPublisher;
 
-    public ExtendedRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager,
-                                  ApplicationEventPublisher eventPublisher) {
+    public BaseJpaRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager,
+                                 ApplicationEventPublisher eventPublisher) {
         super(entityInformation, entityManager);
         this.entityManager = entityManager;
         this.eventPublisher = eventPublisher;
@@ -29,17 +29,17 @@ public class ExtendedRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 
     @Override
     public <S extends T> S save(S entity) {
-        if (entity instanceof CustomAggregateRoot) {
+        if (entity instanceof AggregateRoot) {
             log.info("using custom save method");
             S savedEntity = super.save(entity);
-            publishDomainEvents((CustomAggregateRoot<?>) entity);
+            publishDomainEvents((AggregateRoot<?>) entity);
             return savedEntity;
         } else {
             return super.save(entity);
         }
     }
 
-    private void publishDomainEvents(CustomAggregateRoot<?> aggregate) {
+    private void publishDomainEvents(AggregateRoot<?> aggregate) {
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
             @Override
             public void afterCommit() {

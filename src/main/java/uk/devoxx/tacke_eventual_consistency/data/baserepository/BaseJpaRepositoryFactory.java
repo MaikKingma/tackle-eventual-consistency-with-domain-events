@@ -1,18 +1,17 @@
-package uk.devoxx.tacke_eventual_consistency.data.custom;
+package uk.devoxx.tacke_eventual_consistency.data.baserepository;
 
 import jakarta.persistence.EntityManager;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.data.repository.core.RepositoryInformation;
-import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 
-public class MyJpaRepositoryFactory extends JpaRepositoryFactory {
+public class BaseJpaRepositoryFactory extends JpaRepositoryFactory {
 
     private final EntityManager entityManager;
     private final ApplicationEventPublisher eventPublisher;
 
-    public MyJpaRepositoryFactory(EntityManager entityManager, ApplicationEventPublisher messageLocale) {
+    public BaseJpaRepositoryFactory(EntityManager entityManager, ApplicationEventPublisher messageLocale) {
         super(entityManager);
         this.entityManager = entityManager;
         this.eventPublisher = messageLocale;
@@ -20,6 +19,6 @@ public class MyJpaRepositoryFactory extends JpaRepositoryFactory {
 
     @Override
     protected JpaRepositoryImplementation<?, ?> getTargetRepository(RepositoryInformation information, EntityManager entityManager) {
-        return new ExtendedRepositoryImpl<>(getEntityInformation(information.getDomainType()), entityManager, eventPublisher);
+        return new BaseJpaRepositoryImpl<>(getEntityInformation(information.getDomainType()), entityManager, eventPublisher);
     }
 }

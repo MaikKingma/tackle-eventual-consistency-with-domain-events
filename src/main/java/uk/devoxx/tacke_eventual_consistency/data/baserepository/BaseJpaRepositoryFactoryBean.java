@@ -1,4 +1,4 @@
-package uk.devoxx.tacke_eventual_consistency.data.custom;
+package uk.devoxx.tacke_eventual_consistency.data.baserepository;
 
 import jakarta.persistence.EntityManager;
 import org.springframework.context.ApplicationEventPublisher;
@@ -9,17 +9,17 @@ import org.springframework.lang.NonNull;
 
 import java.io.Serializable;
 
-public class MyRepositoryFactoryBean<T extends JpaRepository<S, ID>, S, ID extends Serializable> extends JpaRepositoryFactoryBean<T, S, ID> {
+public class BaseJpaRepositoryFactoryBean<T extends JpaRepository<S, ID>, S, ID extends Serializable> extends JpaRepositoryFactoryBean<T, S, ID> {
 
     private final ApplicationEventPublisher eventPublisher;
 
-    public MyRepositoryFactoryBean(Class<? extends T> repositoryInterface, ApplicationEventPublisher eventPublisher) {
+    public BaseJpaRepositoryFactoryBean(Class<? extends T> repositoryInterface, ApplicationEventPublisher eventPublisher) {
         super(repositoryInterface);
         this.eventPublisher = eventPublisher;
     }
 
     @Override
     protected RepositoryFactorySupport createRepositoryFactory(@NonNull EntityManager entityManager) {
-        return new MyJpaRepositoryFactory(entityManager, eventPublisher);
+        return new BaseJpaRepositoryFactory(entityManager, eventPublisher);
     }
 }
