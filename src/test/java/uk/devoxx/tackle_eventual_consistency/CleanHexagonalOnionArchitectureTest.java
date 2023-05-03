@@ -4,10 +4,7 @@ import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
-import shaded_package.com.lmax.disruptor.EventProcessor;
-import uk.devoxx.tacke_eventual_consistency.data.book.BookJPA;
-import uk.devoxx.tacke_eventual_consistency.domain.DomainEvent;
-import uk.devoxx.tacke_eventual_consistency.domain.book.Book;
+import uk.devoxx.tackle_eventual_consistency.data.book.BookJPA;
 
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 

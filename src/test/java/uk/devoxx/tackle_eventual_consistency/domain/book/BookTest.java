@@ -1,13 +1,14 @@
-package uk.devoxx.tacke_eventual_consistency.domain.book;
+package uk.devoxx.tackle_eventual_consistency.domain.book;
 
 import org.junit.jupiter.api.Test;
-import uk.devoxx.tacke_eventual_consistency.domain.author.Author;
+import uk.devoxx.tackle_eventual_consistency.domain.author.Author;
+
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static uk.devoxx.tacke_eventual_consistency.domain.book.Genre.HORROR;
+import static uk.devoxx.tackle_eventual_consistency.domain.book.Genre.HORROR;
+
 
 class BookTest {
 
