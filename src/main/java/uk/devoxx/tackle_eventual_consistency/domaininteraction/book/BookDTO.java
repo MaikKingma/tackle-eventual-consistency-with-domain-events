@@ -1,5 +1,6 @@
 package uk.devoxx.tackle_eventual_consistency.domaininteraction.book;
 
+import uk.devoxx.tackle_eventual_consistency.domain.DomainEvent;
 import uk.devoxx.tackle_eventual_consistency.domain.book.Book;
 import uk.devoxx.tackle_eventual_consistency.domaininteraction.author.AuthorDTO;
 

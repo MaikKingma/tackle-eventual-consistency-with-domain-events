@@ -1,5 +1,7 @@
 package uk.devoxx.tackle_eventual_consistency.domain.book;
 
+import lombok.Value;
+import uk.devoxx.tackle_eventual_consistency.domain.DomainEvent;
 import uk.devoxx.tackle_eventual_consistency.domain.author.Author;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

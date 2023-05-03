@@ -1,6 +1,7 @@
 package uk.devoxx.tackle_eventual_consistency.data.book;
 
 
+import org.springframework.data.domain.AbstractAggregateRoot;
 import uk.devoxx.tackle_eventual_consistency.data.author.AuthorJPA;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,7 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import uk.devoxx.tacke_eventual_consistency.domain.DomainEvent;
+import uk.devoxx.tackle_eventual_consistency.domain.DomainEvent;
 
 import java.util.List;
 import java.util.UUID;

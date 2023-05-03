@@ -1,4 +1,4 @@
-package uk.devoxx.tacke_eventual_consistency.domain;
+package uk.devoxx.tackle_eventual_consistency.domain;
 
 /**
  * @author Maik Kingma
