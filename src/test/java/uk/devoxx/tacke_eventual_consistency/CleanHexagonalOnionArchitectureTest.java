@@ -5,7 +5,7 @@ import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 import uk.devoxx.tacke_eventual_consistency.data.book.BookJPA;
-import uk.devoxx.tacke_eventual_consistency.domain.DomainEvent;
+import uk.devoxx.tacke_eventual_consistency.domain.domainevent.DomainEvent;
 import uk.devoxx.tacke_eventual_consistency.domain.book.Book;
 import uk.devoxx.tacke_eventual_consistency.process.EventProcessor;
 import uk.devoxx.tacke_eventual_consistency.process.book.PublishBookDelegate;

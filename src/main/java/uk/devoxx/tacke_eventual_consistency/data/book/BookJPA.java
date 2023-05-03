@@ -15,7 +15,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import uk.devoxx.tacke_eventual_consistency.domain.DomainEvent;
+import uk.devoxx.tacke_eventual_consistency.data.custom.CustomAggregateRoot;
+import uk.devoxx.tacke_eventual_consistency.domain.domainevent.DomainEvent;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +33,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @NoArgsConstructor()
 @AllArgsConstructor
 @Table(name = "book")
-public class BookJPA extends AbstractAggregateRoot<BookJPA> {
+public class BookJPA extends CustomAggregateRoot<BookJPA> {
 
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "book_seq_gen")

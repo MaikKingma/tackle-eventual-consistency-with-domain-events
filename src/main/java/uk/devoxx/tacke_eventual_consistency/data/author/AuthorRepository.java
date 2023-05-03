@@ -1,12 +1,12 @@
 package uk.devoxx.tacke_eventual_consistency.data.author;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import uk.devoxx.tacke_eventual_consistency.data.custom.ExtendedRepository;
 
 /**
  * @author Maik Kingma
  */
 
 @Repository
-public interface AuthorRepository extends JpaRepository<AuthorJPA, Long> {
+public interface AuthorRepository extends ExtendedRepository<AuthorJPA, Long> {
 }
