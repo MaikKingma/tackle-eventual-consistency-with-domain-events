@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>uk.devoxx</groupId>
-    <artifactId>tacke_eventual_consistency</artifactId>
+    <artifactId>tackle_eventual_consistency</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Tackle Eventual Consistency with Domain Events</name>
     <description>Devoxx UK 2023 Mini Lab: Tackle Eventual Consistency with Domain Events</description>
