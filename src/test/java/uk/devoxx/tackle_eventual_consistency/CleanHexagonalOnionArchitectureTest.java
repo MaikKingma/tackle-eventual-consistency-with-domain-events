@@ -16,20 +16,20 @@ import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
  * @author Maik Kingma
  */
 
-@AnalyzeClasses(packages = "uk.devoxx.tacke_eventual_consistency", importOptions = {ImportOption.DoNotIncludeTests.class})
+@AnalyzeClasses(packages = "uk.devoxx.tackle_eventual_consistency", importOptions = {ImportOption.DoNotIncludeTests.class})
 public class CleanHexagonalOnionArchitectureTest {
 
     @ArchTest
     static final ArchRule layer_dependencies_are_respected =
             layeredArchitecture().consideringAllDependencies()
 
-            .layer("command").definedBy("uk.devoxx.tacke_eventual_consistency.command..")
-            .layer("query").definedBy("uk.devoxx.tacke_eventual_consistency.query..")
-            .layer("data").definedBy("uk.devoxx.tacke_eventual_consistency.data..")
-            .layer("acl").definedBy("uk.devoxx.tacke_eventual_consistency.acl..")
-            .layer("process").definedBy("uk.devoxx.tacke_eventual_consistency.process..")
-            .layer("domain interaction").definedBy("uk.devoxx.tacke_eventual_consistency.domaininteraction..")
-            .layer("domain").definedBy("uk.devoxx.tacke_eventual_consistency.domain..")
+            .layer("command").definedBy("uk.devoxx.tackle_eventual_consistency.command..")
+            .layer("query").definedBy("uk.devoxx.tackle_eventual_consistency.query..")
+            .layer("data").definedBy("uk.devoxx.tackle_eventual_consistency.data..")
+            .layer("acl").definedBy("uk.devoxx.tackle_eventual_consistency.acl..")
+            .layer("process").definedBy("uk.devoxx.tackle_eventual_consistency.process..")
+            .layer("domain interaction").definedBy("uk.devoxx.tackle_eventual_consistency.domaininteraction..")
+            .layer("domain").definedBy("uk.devoxx.tackle_eventual_consistency.domain..")
 
             .whereLayer("command").mayNotBeAccessedByAnyLayer()
             .whereLayer("query").mayNotBeAccessedByAnyLayer()
