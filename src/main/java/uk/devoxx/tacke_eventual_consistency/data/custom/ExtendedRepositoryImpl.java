@@ -2,7 +2,6 @@ package uk.devoxx.tacke_eventual_consistency.data.custom;
 
 import jakarta.persistence.EntityManager;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
@@ -19,14 +18,12 @@ public class ExtendedRepositoryImpl<T, ID extends Serializable> extends SimpleJp
     private static final Logger log = getLogger(ExtendedRepositoryImpl.class);
 
     private final EntityManager entityManager;
-    private ApplicationEventPublisher eventPublisher;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public ExtendedRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
+    public ExtendedRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager,
+                                  ApplicationEventPublisher eventPublisher) {
         super(entityInformation, entityManager);
         this.entityManager = entityManager;
-    }
-
-    public void setEventPublisher(ApplicationEventPublisher eventPublisher) {
         this.eventPublisher = eventPublisher;
     }
 
@@ -35,7 +32,7 @@ public class ExtendedRepositoryImpl<T, ID extends Serializable> extends SimpleJp
         if (entity instanceof CustomAggregateRoot) {
             log.info("using custom save method");
             S savedEntity = super.save(entity);
-            // publishDomainEvents((CustomAggregateRoot<?>) entity);
+            publishDomainEvents((CustomAggregateRoot<?>) entity);
             return savedEntity;
         } else {
             return super.save(entity);
