@@ -1,10 +1,10 @@
-package uk.devoxx.tacke_eventual_consistency.process;
+package uk.devoxx.tackle_eventual_consistency.process;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionalEventListener;
-import uk.devoxx.tacke_eventual_consistency.domain.book.Book;
-import uk.devoxx.tacke_eventual_consistency.process.book.PublishBookDelegate;
+import uk.devoxx.tackle_eventual_consistency.domain.book.Book;
+import uk.devoxx.tackle_eventual_consistency.process.book.PublishBookDelegate;
 
 import static org.springframework.transaction.event.TransactionPhase.AFTER_COMMIT;
 

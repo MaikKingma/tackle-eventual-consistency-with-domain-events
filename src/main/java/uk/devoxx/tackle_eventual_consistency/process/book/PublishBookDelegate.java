@@ -1,14 +1,10 @@
-package uk.devoxx.tacke_eventual_consistency.process.book;
+package uk.devoxx.tackle_eventual_consistency.process.book;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import uk.devoxx.tacke_eventual_consistency.domain.book.Book;
-import uk.devoxx.tacke_eventual_consistency.domaininteraction.book.BookFlow;
-
-/**
- * @author Maik Kingma
- */
+import uk.devoxx.tackle_eventual_consistency.domain.book.Book;
+import uk.devoxx.tackle_eventual_consistency.domaininteraction.book.BookFlow;
 
 @Service
 public class PublishBookDelegate {
