@@ -24,7 +24,7 @@ public class EventProcessor {
 
     @TransactionalEventListener(phase = AFTER_COMMIT)
     public void handleEvent(Book.RequestPublishingEvent requestPublishingEvent) {
-        log.info(requestPublishingEvent.toString());
+        log.info("handling event {}", requestPublishingEvent.toString());
         publishBookDelegate.publishBook(requestPublishingEvent);
     }
 }
