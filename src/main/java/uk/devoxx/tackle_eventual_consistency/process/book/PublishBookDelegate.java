@@ -9,7 +9,6 @@ import uk.devoxx.tackle_eventual_consistency.domaininteraction.book.BookFlow;
 /**
  * @author Maik Kingma
  */
-
 @Service
 public class PublishBookDelegate {
     private final BookFlow bookFlow;
